@@ -39,9 +39,8 @@ describe("Search Gyms e2e", () => {
 
     const response = await request(app.server)
     .get('/gyms/search')
-    .query({ query: 'Javascript' })
     .set('Authorization', `Bearer ${token}`)
-
+    .query({ query: 'Javascript' })
 
     expect(response.statusCode).toEqual(200);
     expect(response.body.gyms).toHaveLength(1);

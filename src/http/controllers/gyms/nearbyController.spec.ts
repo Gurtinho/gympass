@@ -12,7 +12,8 @@ describe("Nearby Gyms e2e", () => {
     await app.close();
   });
 
-  it("Should be able to lisr nearby gym", async () => {
+  it("Should be able to list nearby gym", async () => {
+    // precisa estar autenticado com usuario admin
     const { token } = await createAndAuthenticateUser(app, true);
 
     await request(app.server)
@@ -39,12 +40,11 @@ describe("Nearby Gyms e2e", () => {
 
     const response = await request(app.server)
     .get('/gyms/nearby')
+    .set('Authorization', `Bearer ${token}`)
     .query({
       latitude: -26.2575278,
       longitude: -53.6350672
     })
-    .set('Authorization', `Bearer ${token}`)
-
 
     expect(response.statusCode).toEqual(200);
     expect(response.body.gyms).toHaveLength(1);

@@ -10,10 +10,10 @@ export const historyController = async (request: FastifyRequest, reply: FastifyR
   const { page } = historyQuerySchema.parse(request.query);
 
   const fetchUserCheckinsHistoryService = makeFetchUserCheckinsHistoryService();
-  await fetchUserCheckinsHistoryService.execute({
+  const checkins = await fetchUserCheckinsHistoryService.execute({
     userId: request.user.sub,
     page
   });
 
-  return reply.status(201).send({ success: true });
+  return reply.status(200).send(checkins);
 }

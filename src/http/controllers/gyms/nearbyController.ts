@@ -12,10 +12,10 @@ export const nearbyController = async (request: FastifyRequest, reply: FastifyRe
     }),
   });
 
-  const { latitude, longitude } = nearbyBodySchema.parse(request.body);
+  const { latitude, longitude } = nearbyBodySchema.parse(request.query);
 
   const fetchNearbyGymsService = makeFetchNearbyGymsService();
-  await fetchNearbyGymsService.execute({ userLatitude: latitude, userLongitude: longitude });
+  const gyms = await fetchNearbyGymsService.execute({ userLatitude: latitude, userLongitude: longitude });
 
-  return reply.status(201).send({ success: true });
+  return reply.status(200).send(gyms);
 }

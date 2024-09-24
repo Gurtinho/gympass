@@ -13,7 +13,7 @@ describe("History e2e", () => {
     await app.close();
   });
 
-  it("Should be able to clist the history of checkins", async () => {
+  it("Should be able to list the history of checkins", async () => {
     const { token } = await createAndAuthenticateUser(app);
 
     const user = await prisma.user.findFirstOrThrow();
@@ -42,7 +42,7 @@ describe("History e2e", () => {
     });
 
     const response = await request(app.server)
-    .post(`/checkins/history`)
+    .get(`/checkins/history`)
     .set('Authorization', `Bearer ${token}`)
     .send();
 

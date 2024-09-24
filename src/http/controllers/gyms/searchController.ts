@@ -8,10 +8,10 @@ export const searchController = async (request: FastifyRequest, reply: FastifyRe
     page: z.coerce.number().min(1).default(1)
   });
 
-  const { query, page } = searchBodySchema.parse(request.body);
+  const { query, page } = searchBodySchema.parse(request.query);
 
   const searchGymsService = makeSearchGymsService();
-  await searchGymsService.execute({ query, page });
+  const gyms = await searchGymsService.execute({ query, page });
 
-  return reply.status(201).send({ success: true });
+  return reply.status(200).send(gyms);
 }
