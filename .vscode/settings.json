@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "main",
-    "staging"
+    "staging",
+    "testing"
   ]
 }

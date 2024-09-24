@@ -33,6 +33,7 @@ app.setErrorHandler((error, _, reply) => {
     console.error(error);
   } else {
     // TODO: Usar ferramenta externa Sentry/Datadog/NewRelic | Se possível com envio de email ou whatsapp
+    console.log('Ambiente DEV')
   }
   if (error instanceof ZodError) {
     return reply.status(400).send({
