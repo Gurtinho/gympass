@@ -11,7 +11,7 @@ jobs:
       postgres:
         image: postgres:alpine
         ports:
-          - 5411:5432
+          - 5432:5432
         env:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: banana
@@ -36,4 +36,4 @@ jobs:
       - run: yarn test:e2e
         env:
           JWT_SECRET: testing
-          DATABASE_URL: "postgresql://root:banana@localhost:5411/gympass?schema=public"
+          DATABASE_URL: "postgresql://root:banana@localhost:5432/gympass?schema=public"
