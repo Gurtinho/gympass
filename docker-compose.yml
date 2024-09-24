@@ -1,0 +1,24 @@
+networks:
+  gympass:
+    driver: bridge
+
+services:
+  database:
+    image: postgres:alpine
+    container_name: gympass-database
+    restart: always
+    env_file: ./.env
+    tty: true
+    ports:
+      - $DB_LOCAL_PORT:$DB_DOCKER_PORT
+    environment:
+      - DATABASE_URL=$DATABASE_URL
+      - POSTGRES_HOST=$DB_HOST
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PASS
+      - POSTGRES_DB=$DB_BASE
+      - POSTGRES_PORT=$DB_DOCKER_PORT
+    volumes:
+      - .docker/dbdata:/var/lib/postgresql
+    networks:
+      - gympass
